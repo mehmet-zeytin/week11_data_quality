@@ -1,38 +1,29 @@
 name: Data Quality Validation
- 
-# Ne zaman çalışır?
-# Her push ve pull_request'te otomatik tetiklenir
+
 on:
   push:
     branches: ["main"]
   pull_request:
     branches: ["main"]
- 
+  workflow_dispatch:
+
 jobs:
   data-quality-check:
-    # Neden ubuntu-latest?
-    # GitHub'ın ücretsiz Linux makinesi — Windows'a gerek yok
     runs-on: ubuntu-latest
- 
+
     steps:
-      # Adım 1: Repoyu makineye indir
       - name: Checkout repository
-        uses: actions/checkout@v3
- 
-      # Adım 2: Python 3.11 kur
+        uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
- 
-      # Adım 3: Gerekli kütüphaneleri yükle
+
       - name: Install dependencies
         run: pip install -r requirements.txt
- 
-      # Adım 4: Homework 1 - Great Expectations validasyonu çalıştır
-      - name: Run GE Validation (Homework 1)
-        run: python homework1_ge.py
- 
-      # Adım 5: Homework 2 - Pydantic validasyonu çalıştır
-      - name: Run Pydantic Validation (Homework 2)
-        run: python homework2_pydantic.py
+
+      - name: Run Data Quality Pipeline
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python dq_pipeline.py
