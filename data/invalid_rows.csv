@@ -1,6 +1,6 @@
 order_id,date,status,qty,amount,currency,ship_country,hata_nedeni
 ,04-25-24,Shipped,1,500.00,INR,IN,"Value error, order_id boş olamaz"
 ORD-012,04-26-24,Shipped,-1,300.00,INR,IN,"Value error, qty negatif olamaz: -1"
-ORD-013,04-27-24,INVALID_STATUS,2,700.00,INR,IN,"Value error, Geçersiz status: INVALID_STATUS. İzin verilenler: ['Shipped', 'Delivered', 'Cancelled', 'Pending', 'Returned']"
+ORD-013,04-27-24,INVALID_STATUS,2,700.00,INR,IN,"Value error, Geçersiz status: INVALID_STATUS"
 ORD-014,04-28-24,Delivered,1,-50.00,INR,IN,"Value error, amount negatif olamaz: -50.0"
 ORD-016,04-30-24,Delivered,3,2100.00,USD,US,"Value error, currency INR olmalı, gelen: USD | Value error, ship_country IN olmalı, gelen: US"
